@@ -1,0 +1,23 @@
+{
+    // Общие настройки проекта: файл лежит в .vscode/ и попадает в репозиторий.
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.rulers": [120],
+
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "intelephense.format.braces": "psr12",
+
+    "files.exclude": {
+        "**/.git": true
+    },
+    "search.exclude": {
+        "public/uploads/**": true
+    }
+}

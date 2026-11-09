@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- Правила стиля PHP для проекта. Запуск из корня проекта:
+     php phpcs.phar            — проверить
+     php phpcbf.phar           — исправить автоматически то, что можно -->
+<ruleset name="kait-library">
+    <description>Стиль кода проекта: PSR-12</description>
+
+    <file>src</file>
+    <file>public</file>
+    <file>config</file>
+    <file>templates</file>
+
+    <exclude-pattern>public/uploads/*</exclude-pattern>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>*.js</exclude-pattern>
+    <exclude-pattern>*.css</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg name="colors"/>
+    <arg value="s"/>
+
+    <rule ref="PSR12">
+        <!-- в шаблонах HTML и PHP перемешаны — длина строки и побочные эффекты там нормальны -->
+        <exclude name="Generic.Files.LineLength"/>
+        <exclude name="PSR1.Files.SideEffects"/>
+        <!-- проект без пространств имён и автозагрузки -->
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+    </rule>
+
+    <!-- в шаблонах используется синтаксис if (...): ... endif; — для него PSR-12 даёт ложные ошибки -->
+    <rule ref="Squiz.ControlStructures.ControlSignature">
+        <exclude-pattern>templates/*</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
+        <exclude-pattern>templates/*</exclude-pattern>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader">
+        <exclude-pattern>templates/*</exclude-pattern>
+    </rule>
+</ruleset>
