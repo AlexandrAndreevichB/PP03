@@ -3,9 +3,13 @@
 # Использование (из папки pp03-ispo332):
 #   powershell -ExecutionPolicy Bypass -File tools\install.ps1 C:\путь\к\вашему\проекту
 param(
-  [Parameter(Mandatory = $true, Position = 0)]
-  [string]$Target
+  [Parameter(Position = 0)]
+  [string]$Target = ""
 )
+if (-not $Target) {
+  $Target = Read-Host "Перетащите сюда папку вашего проекта (форк kait-library) и нажмите Enter"
+}
+$Target = $Target.Trim().Trim('"')
 $ErrorActionPreference = "Stop"
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
