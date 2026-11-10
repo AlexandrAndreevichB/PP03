@@ -1,0 +1,8 @@
+{
+    // VS Code предложит установить эти расширения при открытии проекта
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "EditorConfig.EditorConfig",
+        "xdebug.php-debug"
+    ]
+}

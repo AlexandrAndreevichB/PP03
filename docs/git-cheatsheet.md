@@ -13,7 +13,8 @@ git pull                           # забрать изменения
 ## Ветки
 
 ```
-git switch main && git pull        # перейти на основную ветку и обновить
+git switch main                   # перейти на основную ветку
+git pull                          # и обновить её
 git switch -c practice/m05         # создать ветку модуля и перейти в неё
 git branch -a                      # все ветки
 git push -u origin practice/m05    # первая отправка новой ветки
@@ -60,4 +61,4 @@ git diff --stat main..practice/m03              # отличия ветки от
 1. Отправьте ветку: `git push -u origin practice/m05`.
 2. На сайте: Compare & pull request (GitHub) / Создать запрос на слияние (GitFlic).
 3. Заполните шаблон описания и влейте PR (позже в практике появятся ревью и автоматические проверки).
-4. Merge → удалить ветку → локально `git switch main && git pull`.
+4. Merge → удалить ветку → локально `git switch main`, затем `git pull`.
