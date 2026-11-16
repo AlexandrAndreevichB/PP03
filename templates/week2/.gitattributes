@@ -1,0 +1,18 @@
+# Как git хранит окончания строк: в репозитории всегда LF,
+# на Windows при извлечении — как настроено в core.autocrlf.
+* text=auto eol=lf
+
+# Файлы Windows, которым нужен CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Двоичные файлы — не трогать
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.docx binary
+*.xlsx binary
+*.pdf binary
+*.phar binary
+*.zip binary

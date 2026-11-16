@@ -176,7 +176,10 @@ REQUIRED = {
     2: ["dfd.drawio", "dfd-0.png", "dfd-1.png", "trace.md", "input-points.md", "*.har"],
     3: ["metrics.md", "metrics-raw.md", "*.png"],
     4: ["README.md", "*.code-profile", "*settings*.zip|*.vssettings", "*empty-diff*.png"],
-    # модули 5–13 добавляются вместе с материалами следующих недель
+    5: ["comparison.md", "*.xlsx|*.ods", "*.png"],
+    6: ["compat-matrix.md", "*.xlsx|*.ods", "lighthouse-before.html|lighthouse-before.json", "*.png"],
+    7: ["video-standard.md", "*.xlsx|*.ods", "frame.png|*.png"],
+    # модули 8–13 добавляются вместе с материалами следующих недель
 }
 # Файлы в корне проекта, которые должны появиться к концу модуля
 ROOT_FILES = {
@@ -195,6 +198,18 @@ def extra_checks(root, m):
             for label in ("М03 до", "М03 после"):
                 if label not in text:
                     problems.append(f"в metrics-raw.md нет замера «{label}» (metrics.py --label \"{label}\")")
+    if m == 7:
+        folder = os.path.join(root, "practice", "m07")
+        videos = [f for f in os.listdir(folder) if f.lower().endswith((".mp4", ".webm", ".mov", ".mkv"))] if os.path.isdir(folder) else []
+        for v in videos:
+            size = os.path.getsize(os.path.join(folder, v)) / 1024 / 1024
+            if size > 10:
+                problems.append(f"{v}: {size:.1f} МБ — больше 10 МБ (лимит GitHub для видео); уменьшите или дайте ссылку")
+        if not videos:
+            std = os.path.join(folder, "video-standard.md")
+            text = open(std, encoding="utf-8", errors="replace").read() if os.path.isfile(std) else ""
+            if "http" not in text.split("## 6.")[-1]:
+                problems.append("нет демо-видео: положите demo.mp4 (до 10 МБ) или дайте ссылку в разделе 6 video-standard.md")
     if m == 4:
         import glob as _glob
         linter_files = ["phpcs.xml", "phpcs.xml.dist", ".phpcs.xml", "pint.json", ".php-cs-fixer.php", ".php-cs-fixer.dist.php",
