@@ -179,7 +179,9 @@ REQUIRED = {
     5: ["comparison.md", "*.xlsx|*.ods", "*.png"],
     6: ["compat-matrix.md", "*.xlsx|*.ods", "lighthouse-before.html|lighthouse-before.json", "*.png"],
     7: ["video-standard.md", "*.xlsx|*.ods", "frame.png|*.png"],
-    # модули 8–13 добавляются вместе с материалами следующих недель
+    8: ["algorithm.md", "flowchart.png", "sequence.png", "characterization.md"],
+    9: ["metrics.md", "metrics-raw.md", "regression.md", "review.md"],
+    # модули 10–13 добавляются вместе с материалами следующих недель
 }
 # Файлы в корне проекта, которые должны появиться к концу модуля
 ROOT_FILES = {
@@ -190,12 +192,12 @@ ROOT_FILES = {
 def extra_checks(root, m):
     """Проверки содержимого, специфичные для модуля."""
     problems = []
-    if m == 3:
-        raw = os.path.join(root, "practice", "m03", "metrics-raw.md")
+    if m in (3, 9):
+        raw = os.path.join(root, "practice", f"m{m:02d}", "metrics-raw.md")
         if os.path.isfile(raw):
             with open(raw, encoding="utf-8", errors="replace") as fh:
                 text = fh.read()
-            for label in ("М03 до", "М03 после"):
+            for label in (f"М{m:02d} до", f"М{m:02d} после"):
                 if label not in text:
                     problems.append(f"в metrics-raw.md нет замера «{label}» (metrics.py --label \"{label}\")")
     if m == 7:
