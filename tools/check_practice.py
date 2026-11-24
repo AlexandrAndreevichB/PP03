@@ -181,18 +181,22 @@ REQUIRED = {
     7: ["video-standard.md", "*.xlsx|*.ods", "frame.png|*.png"],
     8: ["algorithm.md", "flowchart.png", "sequence.png", "characterization.md"],
     9: ["metrics.md", "metrics-raw.md", "regression.md", "review.md"],
-    # модули 10–13 добавляются вместе с материалами следующих недель
+    10: ["fix-log.md", "performance.md", "metrics-raw.md"],
+    11: ["ci.md", "pre-receive"],
+    12: ["inspection-plan.md", "defects.md", "procedure.md"],
+    13: ["client-validation.md", "hook-check.md", "hooks/pre-commit", "final-index.md"],
 }
 # Файлы в корне проекта, которые должны появиться к концу модуля
 ROOT_FILES = {
     4: [".gitattributes", ".editorconfig", ".vscode/settings.json", ".vscode/extensions.json", "CONTRIBUTING.md"],
+    11: [".github/workflows/pp03-quality.yml|.github/workflows/pp03-quality.yaml"],
 }
 
 
 def extra_checks(root, m):
     """Проверки содержимого, специфичные для модуля."""
     problems = []
-    if m in (3, 9):
+    if m in (3, 9, 10):
         raw = os.path.join(root, "practice", f"m{m:02d}", "metrics-raw.md")
         if os.path.isfile(raw):
             with open(raw, encoding="utf-8", errors="replace") as fh:

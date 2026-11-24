@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+git diff --cached --check -- '*.php'
+
+git diff --cached --name-only --diff-filter=ACMR -z -- '*.php' |
+    while IFS= read -r -d '' path; do
+        printf 'PP03: checking staged file %s\n' "$path"
+        git cat-file blob ":$path" | php -l
+    done

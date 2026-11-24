@@ -1,0 +1,26 @@
+name: PP03 quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  php-checks:
+    name: PP03 PHP checks
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Check PHP syntax
+        shell: bash
+        run: |
+          php --version
+          find src public config templates -type f -name '*.php' -print0 |
+            xargs -0 -r -n 1 php -l
+      - name: Check Validator contract
+        run: php practice/m11/validator-smoke.php
