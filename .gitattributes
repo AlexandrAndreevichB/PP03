@@ -1,0 +1,3 @@
+*.pdf binary
+skeleton/practice/m11/pre-receive text eol=lf
+skeleton/practice/m13/hooks/pre-commit text eol=lf
